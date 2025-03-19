@@ -2,8 +2,8 @@ This is a fork from [sverdlov](https://github.com/sverdlov/capacitor-plugin-face
 
 **Current plugin version is for Capacitor 4**
 
-I didn't test it standalone. I use it with Facebook SDK in my projects. Current Facebook SDK version in plugin is 15.1.0.
-If you also have Facebook SDK in your project, I recommend to set its version to 15.1.0.
+I didn't test it standalone. I use it with Facebook SDK in my projects. Current Facebook SDK version in plugin is 17.4.0.
+If you also have Facebook SDK in your project, I recommend to set its version to 17.4.0.
 
 
 ## Installation
@@ -11,13 +11,13 @@ If you also have Facebook SDK in your project, I recommend to set its version to
 To use with npm
 
 ```bash
-$ npm i @magroove/capacitor-plugin-facebook-analytics
+$ npm i @silvermaster-gt/capacitor-plugin-meta-analytics
 ```
 
 To use with yarn
 
 ```bash
-yarn add @magroove/capacitor-plugin-facebook-analytics
+yarn add @silvermaster-gt/capacitor-plugin-meta-analytics
 ```
 
 ## Android configuration
@@ -66,7 +66,7 @@ You have to implement _setAdvertiserTrackingEnabled_ method for iOS before sendi
 ## API
 
 ```ts
-import { FacebookAnalytics } from 'capacitor-plugin-facebook-analytics';
+import { FacebookAnalytics } from 'capacitor-plugin-meta-analytics';
 
 // Example commands.
 await FacebookAnalytics.setAdvertiserTrackingEnabled(options: { enabled: boolean }): Promise<string>;

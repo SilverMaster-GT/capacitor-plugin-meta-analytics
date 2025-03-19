@@ -3,7 +3,7 @@ require 'json'
 package = JSON.parse(File.read(File.join(__dir__, 'package.json')))
 
 Pod::Spec.new do |s|
-  s.name = 'MagrooveCapacitorPluginFacebookAnalytics'
+  s.name = 'SilverMasterGTCapacitorPluginFacebookAnalytics'
   s.version = package['version']
   s.summary = package['description']
   s.license = package['license']
@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
   s.swift_version = '5.1'
 #   s.static_framework = true
   s.dependency 'Capacitor'
-  s.dependency 'FBSDKCoreKit', '~> 14.1.0'
+  s.dependency 'FBSDKCoreKit', '17.4.0'
 end

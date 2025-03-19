@@ -1,6 +1,6 @@
 {
-  "name": "@magroove/capacitor-plugin-facebook-analytics",
-  "version": "0.0.13",
+  "name": "@silvermaster-gt/capacitor-plugin-meta-analytics",
+  "version": "0.0.17",
   "description": "Provide Facebook analytics functionality to Capacitor-based projects.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -11,16 +11,16 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "MagrooveCapacitorPluginFacebookAnalytics.podspec"
+    "SilverMasterGTCapacitorPluginFacebookAnalytics.podspec"
   ],
   "author": "Todd Vrba",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:Magroove/capacitor-plugin-facebook-analytics.git"
+    "url": "https://github.com/SilverMaster-GT/capacitor-plugin-meta-analytics.git"
   },
   "bugs": {
-    "url": "git@github.com:Magroove/capacitor-plugin-facebook-analytics.git/issues"
+    "url": "https://github.com/SilverMaster-GT/capacitor-plugin-meta-analytics/issues"
   },
   "keywords": [
     "capacitor",
