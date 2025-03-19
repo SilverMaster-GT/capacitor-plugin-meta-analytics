@@ -1,6 +1,6 @@
 This is a fork from [sverdlov](https://github.com/sverdlov/capacitor-plugin-facebook-analytics)
 
-**Current plugin version is for Capacitor 4**
+**Current plugin version is for Capacitor 6**
 
 I didn't test it standalone. I use it with Facebook SDK in my projects. Current Facebook SDK version in plugin is 17.4.0.
 If you also have Facebook SDK in your project, I recommend to set its version to 17.4.0.
