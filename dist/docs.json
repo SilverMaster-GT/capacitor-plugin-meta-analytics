@@ -7,7 +7,7 @@
     "methods": [
       {
         "name": "setAdvertiserTrackingEnabled",
-        "signature": "(options: { enabled: boolean; }) => any",
+        "signature": "(options: { enabled: boolean; }) => Promise<string>",
         "parameters": [
           {
             "name": "options",
@@ -15,7 +15,7 @@
             "type": "{ enabled: boolean; }"
           }
         ],
-        "returns": "any",
+        "returns": "Promise<string>",
         "tags": [],
         "docs": "",
         "complexTypes": [],
@@ -23,7 +23,7 @@
       },
       {
         "name": "logEvent",
-        "signature": "(options: { event: string; valueToSum?: number; params?: any; }) => any",
+        "signature": "(options: { event: string; valueToSum?: number; params?: any; }) => Promise<string>",
         "parameters": [
           {
             "name": "options",
@@ -31,7 +31,7 @@
             "type": "{ event: string; valueToSum?: number | undefined; params?: any; }"
           }
         ],
-        "returns": "any",
+        "returns": "Promise<string>",
         "tags": [],
         "docs": "",
         "complexTypes": [],
@@ -39,7 +39,7 @@
       },
       {
         "name": "logPurchase",
-        "signature": "(options: { amount: number; currency: string; params: any; }) => any",
+        "signature": "(options: { amount: number; currency: string; params: any; }) => Promise<string>",
         "parameters": [
           {
             "name": "options",
@@ -47,7 +47,7 @@
             "type": "{ amount: number; currency: string; params: any; }"
           }
         ],
-        "returns": "any",
+        "returns": "Promise<string>",
         "tags": [],
         "docs": "",
         "complexTypes": [],
@@ -55,7 +55,7 @@
       },
       {
         "name": "logAddPaymentInfo",
-        "signature": "(options: { success: number; }) => any",
+        "signature": "(options: { success: number; }) => Promise<string>",
         "parameters": [
           {
             "name": "options",
@@ -63,7 +63,7 @@
             "type": "{ success: number; }"
           }
         ],
-        "returns": "any",
+        "returns": "Promise<string>",
         "tags": [],
         "docs": "",
         "complexTypes": [],
@@ -71,7 +71,7 @@
       },
       {
         "name": "logAddToCart",
-        "signature": "(options: { amount: number; currency: string; params?: any; }) => any",
+        "signature": "(options: { amount: number; currency: string; params?: any; }) => Promise<string>",
         "parameters": [
           {
             "name": "options",
@@ -79,7 +79,7 @@
             "type": "{ amount: number; currency: string; params?: any; }"
           }
         ],
-        "returns": "any",
+        "returns": "Promise<string>",
         "tags": [],
         "docs": "",
         "complexTypes": [],
@@ -87,7 +87,7 @@
       },
       {
         "name": "logCompleteRegistration",
-        "signature": "(options: { params?: any; }) => any",
+        "signature": "(options: { params?: any; }) => Promise<string>",
         "parameters": [
           {
             "name": "options",
@@ -95,7 +95,7 @@
             "type": "{ params?: any; }"
           }
         ],
-        "returns": "any",
+        "returns": "Promise<string>",
         "tags": [],
         "docs": "",
         "complexTypes": [],
@@ -103,7 +103,7 @@
       },
       {
         "name": "logInitiatedCheckout",
-        "signature": "(options: { amount: number; params?: any; }) => any",
+        "signature": "(options: { amount: number; params?: any; }) => Promise<string>",
         "parameters": [
           {
             "name": "options",
@@ -111,7 +111,7 @@
             "type": "{ amount: number; params?: any; }"
           }
         ],
-        "returns": "any",
+        "returns": "Promise<string>",
         "tags": [],
         "docs": "",
         "complexTypes": [],

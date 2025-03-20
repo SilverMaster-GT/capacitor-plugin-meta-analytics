@@ -1,34 +1,26 @@
 package com.vrba.plugins.facebookanalytics;
 
+import android.os.Bundle;
 import com.facebook.appevents.AppEventsConstants;
+import com.facebook.appevents.AppEventsLogger;
 import com.getcapacitor.Bridge;
 import com.getcapacitor.JSObject;
-import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
+import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.PluginMethod;
-import com.facebook.appevents.AppEventsLogger;
-
-import android.os.Bundle;
 
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Iterator;
 
-@CapacitorPlugin(
-    name = "FacebookAnalytics"
-)
+@CapacitorPlugin(name = "FacebookAnalytics")
 public class FacebookAnalytics extends Plugin {
     private AppEventsLogger logger;
 
     @Override
     public void load() {
-        if (bridge == null) {
-            bridge = this.getBridge();
-        }
-
-        logger = AppEventsLogger.newLogger(bridge.getActivity().getApplicationContext());
-
+        logger = AppEventsLogger.newLogger(getContext());
         super.load();
     }
 
@@ -39,36 +31,25 @@ public class FacebookAnalytics extends Plugin {
 
     @PluginMethod
     public void logEvent(PluginCall call) {
-        if (!call.getData().has("event")) {
+        String event = call.getString("event");
+        if (event == null) {
             call.reject("Must provide an event");
             return;
         }
 
-        String event = call.getString("event");
         JSObject params = call.getObject("params", new JSObject());
-        Double valueToSum = call.getDouble("valueToSum", null);
+        Double valueToSum = call.getDouble("valueToSum");
 
-        if (params.length() > 0) {
-            Bundle parameters = new Bundle();
-            Iterator<String> iter = params.keys();
+        Bundle parameters = new Bundle();
+        for (Iterator<String> iter = params.keys(); iter.hasNext();) {
+            String key = iter.next();
+            parameters.putString(key, params.getString(key));
+        }
 
-            while (iter.hasNext()) {
-                String key = iter.next();
-                String value = params.getString(key);
-                parameters.putString(key, value);
-            }
-            if (valueToSum != null) {
-                logger.logEvent(event, valueToSum, parameters);
-            } else {
-                logger.logEvent(event, parameters);
-            }
-
+        if (valueToSum != null) {
+            logger.logEvent(event, valueToSum, parameters);
         } else {
-            if (valueToSum != null) {
-                logger.logEvent(event, valueToSum);
-            } else {
-                logger.logEvent(event);
-            }
+            logger.logEvent(event, parameters);
         }
 
         call.resolve();
@@ -76,30 +57,23 @@ public class FacebookAnalytics extends Plugin {
 
     @PluginMethod
     public void logPurchase(PluginCall call) {
-        if (!call.getData().has("amount")) {
-            call.reject("Must provide an amount");
+        Double amount = call.getDouble("amount");
+        String curr = call.getString("currency");
+
+        if (amount == null || curr == null) {
+            call.reject("Must provide an amount and currency");
             return;
         }
 
-        Double amount = call.getDouble("amount", null);
-        String curr = call.getString("currency");
         JSObject params = call.getObject("params", new JSObject());
-
-        Currency currency = Currency.getInstance(curr);
-        if (params.length() > 0) {
-            Bundle parameters = new Bundle();
-            Iterator<String> iter = params.keys();
-
-            while (iter.hasNext()) {
-                String key = iter.next();
-                String value = params.getString(key);
-                parameters.putString(key, value);
-            }
-            logger.logPurchase(BigDecimal.valueOf(amount), currency, parameters);
-        } else {
-            logger.logPurchase(BigDecimal.valueOf(amount), currency);
+        Bundle parameters = new Bundle();
+        for (Iterator<String> iter = params.keys(); iter.hasNext();) {
+            String key = iter.next();
+            parameters.putString(key, params.getString(key));
         }
 
+        Currency currency = Currency.getInstance(curr);
+        logger.logPurchase(BigDecimal.valueOf(amount), currency, parameters);
 
         call.resolve();
     }
@@ -110,69 +84,53 @@ public class FacebookAnalytics extends Plugin {
         Bundle params = new Bundle();
         params.putInt(AppEventsConstants.EVENT_PARAM_SUCCESS, success);
         logger.logEvent(AppEventsConstants.EVENT_NAME_ADDED_PAYMENT_INFO, params);
-
         call.resolve();
     }
 
     @PluginMethod
     public void logAddToCart(PluginCall call) {
-        if (!call.getData().has("amount")) {
-            call.reject("Must provide an amount");
+        Double amount = call.getDouble("amount");
+        String currency = call.getString("currency");
+
+        if (amount == null || currency == null) {
+            call.reject("Must provide an amount and currency");
             return;
         }
-        Double amount = call.getDouble("amount", null);
-        String currency = call.getString("currency");
-        Bundle params = new Bundle();
 
+        Bundle params = new Bundle();
         params.putString(AppEventsConstants.EVENT_PARAM_CURRENCY, currency);
         logger.logEvent(AppEventsConstants.EVENT_NAME_ADDED_TO_CART, amount, params);
-
         call.resolve();
     }
 
     @PluginMethod
     public void logCompleteRegistration(PluginCall call) {
         JSObject params = call.getObject("params", new JSObject());
-        if (params.length() > 0) {
-            Bundle parameters = new Bundle();
-            Iterator<String> iter = params.keys();
-
-            while (iter.hasNext()) {
-                String key = iter.next();
-                String value = params.getString(key);
-                parameters.putString(key, value);
-            }
-            logger.logEvent(AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION, parameters);
-        } else {
-            logger.logEvent(AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION);
+        Bundle parameters = new Bundle();
+        for (Iterator<String> iter = params.keys(); iter.hasNext();) {
+            String key = iter.next();
+            parameters.putString(key, params.getString(key));
         }
-
+        logger.logEvent(AppEventsConstants.EVENT_NAME_COMPLETED_REGISTRATION, parameters);
         call.resolve();
     }
 
     @PluginMethod
     public void logInitiatedCheckout(PluginCall call) {
-        if (!call.getData().has("amount")) {
+        Double amount = call.getDouble("amount");
+        if (amount == null) {
             call.reject("Must provide an amount");
             return;
         }
-        Double amount = call.getDouble("amount", null);
 
         JSObject params = call.getObject("params", new JSObject());
-        if (params.length() > 0) {
-            Bundle parameters = new Bundle();
-            Iterator<String> iter = params.keys();
-
-            while (iter.hasNext()) {
-                String key = iter.next();
-                String value = params.getString(key);
-                parameters.putString(key, value);
-            }
-            logger.logEvent(AppEventsConstants.EVENT_NAME_INITIATED_CHECKOUT, amount, parameters);
-        } else {
-            logger.logEvent(AppEventsConstants.EVENT_NAME_INITIATED_CHECKOUT, amount);
+        Bundle parameters = new Bundle();
+        for (Iterator<String> iter = params.keys(); iter.hasNext();) {
+            String key = iter.next();
+            parameters.putString(key, params.getString(key));
         }
 
+        logger.logEvent(AppEventsConstants.EVENT_NAME_INITIATED_CHECKOUT, amount, parameters);
         call.resolve();
     }
 }
