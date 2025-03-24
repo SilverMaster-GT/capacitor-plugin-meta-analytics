@@ -10,6 +10,7 @@ import com.getcapacitor.PluginMethod;
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Iterator;
+import android.util.Log;
 
 import android.os.Bundle;
 
@@ -40,12 +41,26 @@ public class FacebookAnalytics extends Plugin {
         Double valueToSum = call.getDouble("valueToSum");
         Bundle parameters = new Bundle();
 
+        // Auditoría de parámetros
+        Log.d("logEvent", "Auditoría de parámetros:");
+        Log.d("logEvent", "Evento: " + event);
+        Log.d("logEvent", "Params: " + params.toString());
+        Log.d("logEvent", "ValueToSum: " + valueToSum);
+
         if (params != null && params.length() > 0) {
             Iterator<String> keys = params.keys();
             while (keys.hasNext()) {
                 String key = keys.next();
                 String value = params.getString(key);
                 parameters.putString(key, value);
+            }
+        }
+
+         // Auditoría del Bundle antes de enviar al SDK de Meta
+        Log.d("logEvent", "Auditoría del Bundle:");
+        if (parameters != null) {
+            for (String key : parameters.keySet()) {
+                Log.d("logEvent", "Bundle Key: " + key + ", Value: " + parameters.get(key));
             }
         }
 
