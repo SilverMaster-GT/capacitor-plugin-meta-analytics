@@ -1,5 +1,9 @@
 package com.vrba.plugins.facebookanalytics;
 
+// Debug Only
+// import com.facebook.FacebookSdk;
+// import com.facebook.LoggingBehavior;
+
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
 import com.getcapacitor.JSObject;
@@ -21,6 +25,8 @@ public class FacebookAnalytics extends Plugin {
     @Override
     public void load() {
         super.load();
+        // FacebookSdk.setIsDebugEnabled(true); // Habilita el modo de depuración
+        // FacebookSdk.addLoggingBehavior(LoggingBehavior.APP_EVENTS); // Habilita los registros de eventos de la aplicación
         logger = AppEventsLogger.newLogger(getContext());
     }
 
@@ -67,9 +73,9 @@ public class FacebookAnalytics extends Plugin {
         if (valueToSum != null) {
             logger.logEvent(event, valueToSum, parameters);
         } else {
-            logger.logEvent(event);
+            logger.logEvent(event, parameters);
         }
-
+        logger.flush();
         call.resolve();
     }
 
