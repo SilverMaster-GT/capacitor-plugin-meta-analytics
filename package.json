@@ -1,6 +1,6 @@
 {
   "name": "@silvermaster-gt/capacitor-plugin-meta-analytics",
-  "version": "0.0.18-rc.4",
+  "version": "0.0.18-rc.5",
   "description": "Provide Facebook analytics functionality to Capacitor-based projects.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -11,7 +11,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "SilverMasterGTCapacitorPluginFacebookAnalytics.podspec"
+    "SilverMasterGtCapacitorPluginMetaAnalytics.podspec"
   ],
   "author": "Todd Vrba",
   "license": "MIT",
