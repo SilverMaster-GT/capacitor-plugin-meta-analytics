@@ -1,6 +1,6 @@
 {
   "name": "@silvermaster-gt/capacitor-plugin-meta-analytics",
-  "version": "0.0.18-rc.5",
+  "version": "0.0.18-rc.7",
   "description": "Provide Facebook analytics functionality to Capacitor-based projects.",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -11,7 +11,7 @@
     "android/build.gradle",
     "dist/",
     "ios/Plugin/",
-    "SilverMasterGtCapacitorPluginMetaAnalytics.podspec"
+    "SilvermasterGtCapacitorPluginMetaAnalytics.podspec"
   ],
   "author": "Todd Vrba",
   "license": "MIT",
@@ -33,6 +33,7 @@
     "verify:android": "cd android && ./gradlew clean build test && cd ..",
     "verify:androidw": "cd android && gradlew.bat clean build test && cd ..",
     "verify:web": "npm run build",
+    "verifyApps": "npm run verify:ios && npm run verify:android",
     "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
     "fmt": "npm run eslint -- --fix && npm run prettier -- --write && npm run swiftlint -- --fix --format",
     "eslint": "eslint . --ext ts",
